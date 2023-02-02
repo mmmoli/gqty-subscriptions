@@ -1,9 +1,9 @@
+import dynamic from "next/dynamic";
 import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "@next/font/google";
-import styles from "../styles/Home.module.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const View = dynamic(() => import("../components/view").then((m) => m.View), {
+  ssr: false,
+});
 
 export default function Home() {
   return (
@@ -15,8 +15,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <h1>To Dos</h1>
-      Ì</main>
+        <View />
+      </main>
     </>
   );
 }

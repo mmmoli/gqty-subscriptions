@@ -3,51 +3,23 @@
  */
 
 import { createReactClient } from "@gqty/react";
-import { createSubscriptionsClient } from "@gqty/subscriptions";
-import type { QueryFetcher } from "gqty";
-import { createClient } from "gqty";
+import { queryFetcher } from "./query-fetcher";
+import { subscriptionsClient } from "./subscription-client";
+import {
+  castNotSkeleton,
+  castNotSkeletonDeep,
+  createClient,
+  getFields,
+  getArrayFields,
+  prepass,
+  selectFields,
+} from "gqty";
 import type {
   GeneratedSchema,
   SchemaObjectTypes,
   SchemaObjectTypesNames,
 } from "./schema.generated";
 import { generatedSchema, scalarsEnumsHash } from "./schema.generated";
-
-const queryFetcher: QueryFetcher = async function (
-  query,
-  variables,
-  fetchOptions
-) {
-  // Modify "/api/graphql" if needed
-  const response = await fetch("/api/graphql", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      query,
-      variables,
-    }),
-    mode: "cors",
-    ...fetchOptions,
-  });
-
-  const json = await response.json();
-
-  return json;
-};
-
-const subscriptionsClient =
-  typeof window !== "undefined"
-    ? createSubscriptionsClient({
-        wsEndpoint: () => {
-          // Modify if needed
-          const url = new URL("/api/graphql", window.location.href);
-          url.protocol = url.protocol.replace("http", "ws");
-          return url.href;
-        },
-      })
-    : undefined;
 
 export const client = createClient<
   GeneratedSchema,
@@ -102,6 +74,21 @@ export {
   useHydrateCache,
   prepareQuery,
   useSubscription,
+  selectFields,
+  castNotSkeleton,
+  castNotSkeletonDeep,
+  getFields,
+  getArrayFields,
+  prepass,
 };
 
 export * from "./schema.generated";
+
+if (typeof window !== "undefined") {
+  import("@gqty/logger").then(({ createLogger }) => {
+    const logger = createLogger(client, {
+      // Custom options...
+    });
+    logger.start();
+  });
+}

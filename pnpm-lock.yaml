@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@gqty/cli': 3.3.1-alpha-4fa7ef40.0
+  '@gqty/logger': 2.0.3-alpha-db574a66.0
   '@gqty/react': 2.1.2-alpha-db574a66.0
   '@gqty/subscriptions': 2.0.2-alpha-db574a66.0
   '@next/font': 13.1.5
@@ -35,6 +36,7 @@ dependencies:
 
 devDependencies:
   '@gqty/cli': 3.3.1-alpha-4fa7ef40.0_graphql@16.6.0
+  '@gqty/logger': 2.0.3-alpha-db574a66.0_nmcpyxpez4gkxze6yn4ovo2neu
 
 packages:
 
@@ -77,6 +79,16 @@ packages:
       graphql: 16.6.0
     transitivePeerDependencies:
       - encoding
+    dev: true
+
+  /@gqty/logger/2.0.3-alpha-db574a66.0_nmcpyxpez4gkxze6yn4ovo2neu:
+    resolution: {integrity: sha512-rI8Ya4s5vFHbl5j7DeNGlrgkgQcPqrl6SDm2Zqjn4RLNqwU+GngZSX95YlTN/T2cYmA9oFL9DiAkXr4d/n0ApQ==}
+    engines: {node: ^12.20.0 || >=14.13.0}
+    peerDependencies:
+      gqty: ^2.3.1-alpha-db574a66.0
+    dependencies:
+      gqty: 2.3.1-alpha-db574a66.0_graphql@16.6.0
+      prettier: 2.8.3
     dev: true
 
   /@gqty/react/2.1.2-alpha-db574a66.0_drleq4jmv3o2qohzgi2n6ga67y:
@@ -1323,7 +1335,6 @@ packages:
     dependencies:
       '@gqty/utils': 1.0.0
       graphql: 16.6.0
-    dev: false
 
   /graceful-fs/4.2.10:
     resolution: {integrity: sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==}
@@ -1932,6 +1943,12 @@ packages:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
     dev: false
+
+  /prettier/2.8.3:
+    resolution: {integrity: sha512-tJ/oJ4amDihPoufT5sM0Z1SKEuKay8LfVAMlbbhnnkvt6BUserZylqo2PN+p9KeljLr0OHa2rXHU1T8reeoTrw==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    dev: true
 
   /prop-types/15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
