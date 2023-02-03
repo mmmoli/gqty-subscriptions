@@ -1,24 +1,19 @@
-import { FC } from "react";
-import { useSubscription } from "../libs/gqty";
+import { FC, useState } from "react";
+import { Todos } from "./view/todos";
+import { todos, contacts, apps } from "../libs/gqty";
+import { Contracts } from "./view/contracts";
+import { Apps } from "./view/apps";
 
 export const View: FC = () => {
-  const subscription = useSubscription();
-  const todos = subscription.todos();
+  const [selectedTodo, setSelectedTodo] = useState<todos["id"] | null>(null);
+  const [selectedContract, setSelectedContract] = useState<contacts["id"] | null>(null);
+  const [selectedApp, setSelectedApp] = useState<apps["id"] | null>(null);
 
   return (
-    <div className="w-screen min-h-screen border-neutral border-8 px-4">
-      <div className="menu bg-base-100 w-56">
-        <div className="prose pl-4 mt-8 mb-4"><h2>TO Dos</h2></div>
-        <ul>
-          {todos.map((todo) => (
-            <li key={todo.id ?? "todo-id"}>
-              <div>
-                <h2>{todo.content}</h2>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+    <div className="w-screen min-h-screen border-neutral border-8 px-4 flex justify-between">
+      <Todos selected={selectedTodo} setSelected={setSelectedTodo}/>
+      <Contracts selected={selectedContract} setSelected={setSelectedContract}/>
+      <Apps selected={selectedApp} setSelected={setSelectedApp}/>
     </div>
   );
 };
