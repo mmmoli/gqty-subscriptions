@@ -87,6 +87,138 @@ export interface String_comparison_exp {
   _similar?: InputMaybe<Scalars["String"]>;
 }
 
+export interface apps_aggregate_bool_exp {
+  count?: InputMaybe<apps_aggregate_bool_exp_count>;
+}
+
+export interface apps_aggregate_bool_exp_count {
+  arguments?: InputMaybe<Array<apps_select_column>>;
+  distinct?: InputMaybe<Scalars["Boolean"]>;
+  filter?: InputMaybe<apps_bool_exp>;
+  predicate: Int_comparison_exp;
+}
+
+/** order by aggregate values of table "apps" */
+export interface apps_aggregate_order_by {
+  count?: InputMaybe<order_by>;
+  max?: InputMaybe<apps_max_order_by>;
+  min?: InputMaybe<apps_min_order_by>;
+}
+
+/** input type for inserting array relation for remote table "apps" */
+export interface apps_arr_rel_insert_input {
+  data: Array<apps_insert_input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<apps_on_conflict>;
+}
+
+/** Boolean expression to filter rows from the table "apps". All fields are combined with a logical 'AND'. */
+export interface apps_bool_exp {
+  _and?: InputMaybe<Array<apps_bool_exp>>;
+  _not?: InputMaybe<apps_bool_exp>;
+  _or?: InputMaybe<Array<apps_bool_exp>>;
+  contact?: InputMaybe<contacts_bool_exp>;
+  contact_id?: InputMaybe<uuid_comparison_exp>;
+  id?: InputMaybe<uuid_comparison_exp>;
+  name?: InputMaybe<String_comparison_exp>;
+}
+
+/** unique or primary key constraints on table "apps" */
+export enum apps_constraint {
+  /** unique or primary key constraint on columns "id" */
+  apps_pkey = "apps_pkey",
+}
+
+/** input type for inserting data into table "apps" */
+export interface apps_insert_input {
+  contact?: InputMaybe<contacts_obj_rel_insert_input>;
+  contact_id?: InputMaybe<Scalars["uuid"]>;
+  id?: InputMaybe<Scalars["uuid"]>;
+  name?: InputMaybe<Scalars["String"]>;
+}
+
+/** order by max() on columns of table "apps" */
+export interface apps_max_order_by {
+  contact_id?: InputMaybe<order_by>;
+  id?: InputMaybe<order_by>;
+  name?: InputMaybe<order_by>;
+}
+
+/** order by min() on columns of table "apps" */
+export interface apps_min_order_by {
+  contact_id?: InputMaybe<order_by>;
+  id?: InputMaybe<order_by>;
+  name?: InputMaybe<order_by>;
+}
+
+/** on_conflict condition type for table "apps" */
+export interface apps_on_conflict {
+  constraint: apps_constraint;
+  update_columns?: Array<apps_update_column>;
+  where?: InputMaybe<apps_bool_exp>;
+}
+
+/** Ordering options when selecting data from "apps". */
+export interface apps_order_by {
+  contact?: InputMaybe<contacts_order_by>;
+  contact_id?: InputMaybe<order_by>;
+  id?: InputMaybe<order_by>;
+  name?: InputMaybe<order_by>;
+}
+
+/** primary key columns input for table: apps */
+export interface apps_pk_columns_input {
+  id: Scalars["uuid"];
+}
+
+/** select columns of table "apps" */
+export enum apps_select_column {
+  /** column name */
+  contact_id = "contact_id",
+  /** column name */
+  id = "id",
+  /** column name */
+  name = "name",
+}
+
+/** input type for updating data in table "apps" */
+export interface apps_set_input {
+  contact_id?: InputMaybe<Scalars["uuid"]>;
+  id?: InputMaybe<Scalars["uuid"]>;
+  name?: InputMaybe<Scalars["String"]>;
+}
+
+/** Streaming cursor of the table "apps" */
+export interface apps_stream_cursor_input {
+  /** Stream column input with initial value */
+  initial_value: apps_stream_cursor_value_input;
+  /** cursor ordering */
+  ordering?: InputMaybe<cursor_ordering>;
+}
+
+/** Initial value of the column from where the streaming should start */
+export interface apps_stream_cursor_value_input {
+  contact_id?: InputMaybe<Scalars["uuid"]>;
+  id?: InputMaybe<Scalars["uuid"]>;
+  name?: InputMaybe<Scalars["String"]>;
+}
+
+/** update columns of table "apps" */
+export enum apps_update_column {
+  /** column name */
+  contact_id = "contact_id",
+  /** column name */
+  id = "id",
+  /** column name */
+  name = "name",
+}
+
+export interface apps_updates {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<apps_set_input>;
+  where: apps_bool_exp;
+}
+
 /** append existing jsonb value of filtered columns with new jsonb value */
 export interface authProviderRequests_append_input {
   options?: InputMaybe<Scalars["jsonb"]>;
@@ -1303,6 +1435,111 @@ export interface citext_comparison_exp {
   _similar?: InputMaybe<Scalars["citext"]>;
 }
 
+/** Boolean expression to filter rows from the table "contacts". All fields are combined with a logical 'AND'. */
+export interface contacts_bool_exp {
+  _and?: InputMaybe<Array<contacts_bool_exp>>;
+  _not?: InputMaybe<contacts_bool_exp>;
+  _or?: InputMaybe<Array<contacts_bool_exp>>;
+  apps?: InputMaybe<apps_bool_exp>;
+  apps_aggregate?: InputMaybe<apps_aggregate_bool_exp>;
+  firstName?: InputMaybe<String_comparison_exp>;
+  id?: InputMaybe<uuid_comparison_exp>;
+  lastName?: InputMaybe<String_comparison_exp>;
+  todos?: InputMaybe<todos_bool_exp>;
+  todos_aggregate?: InputMaybe<todos_aggregate_bool_exp>;
+}
+
+/** unique or primary key constraints on table "contacts" */
+export enum contacts_constraint {
+  /** unique or primary key constraint on columns "id" */
+  contacts_pkey = "contacts_pkey",
+}
+
+/** input type for inserting data into table "contacts" */
+export interface contacts_insert_input {
+  apps?: InputMaybe<apps_arr_rel_insert_input>;
+  firstName?: InputMaybe<Scalars["String"]>;
+  id?: InputMaybe<Scalars["uuid"]>;
+  lastName?: InputMaybe<Scalars["String"]>;
+  todos?: InputMaybe<todos_arr_rel_insert_input>;
+}
+
+/** input type for inserting object relation for remote table "contacts" */
+export interface contacts_obj_rel_insert_input {
+  data: contacts_insert_input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<contacts_on_conflict>;
+}
+
+/** on_conflict condition type for table "contacts" */
+export interface contacts_on_conflict {
+  constraint: contacts_constraint;
+  update_columns?: Array<contacts_update_column>;
+  where?: InputMaybe<contacts_bool_exp>;
+}
+
+/** Ordering options when selecting data from "contacts". */
+export interface contacts_order_by {
+  apps_aggregate?: InputMaybe<apps_aggregate_order_by>;
+  firstName?: InputMaybe<order_by>;
+  id?: InputMaybe<order_by>;
+  lastName?: InputMaybe<order_by>;
+  todos_aggregate?: InputMaybe<todos_aggregate_order_by>;
+}
+
+/** primary key columns input for table: contacts */
+export interface contacts_pk_columns_input {
+  id: Scalars["uuid"];
+}
+
+/** select columns of table "contacts" */
+export enum contacts_select_column {
+  /** column name */
+  firstName = "firstName",
+  /** column name */
+  id = "id",
+  /** column name */
+  lastName = "lastName",
+}
+
+/** input type for updating data in table "contacts" */
+export interface contacts_set_input {
+  firstName?: InputMaybe<Scalars["String"]>;
+  id?: InputMaybe<Scalars["uuid"]>;
+  lastName?: InputMaybe<Scalars["String"]>;
+}
+
+/** Streaming cursor of the table "contacts" */
+export interface contacts_stream_cursor_input {
+  /** Stream column input with initial value */
+  initial_value: contacts_stream_cursor_value_input;
+  /** cursor ordering */
+  ordering?: InputMaybe<cursor_ordering>;
+}
+
+/** Initial value of the column from where the streaming should start */
+export interface contacts_stream_cursor_value_input {
+  firstName?: InputMaybe<Scalars["String"]>;
+  id?: InputMaybe<Scalars["uuid"]>;
+  lastName?: InputMaybe<Scalars["String"]>;
+}
+
+/** update columns of table "contacts" */
+export enum contacts_update_column {
+  /** column name */
+  firstName = "firstName",
+  /** column name */
+  id = "id",
+  /** column name */
+  lastName = "lastName",
+}
+
+export interface contacts_updates {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<contacts_set_input>;
+  where: contacts_bool_exp;
+}
+
 /** ordering argument of a cursor */
 export enum cursor_ordering {
   /** ascending ordering of the cursor */
@@ -1658,11 +1895,54 @@ export interface timestamptz_comparison_exp {
   _nin?: InputMaybe<Array<Scalars["timestamptz"]>>;
 }
 
+export interface todos_aggregate_bool_exp {
+  bool_and?: InputMaybe<todos_aggregate_bool_exp_bool_and>;
+  bool_or?: InputMaybe<todos_aggregate_bool_exp_bool_or>;
+  count?: InputMaybe<todos_aggregate_bool_exp_count>;
+}
+
+export interface todos_aggregate_bool_exp_bool_and {
+  arguments: todos_select_column_todos_aggregate_bool_exp_bool_and_arguments_columns;
+  distinct?: InputMaybe<Scalars["Boolean"]>;
+  filter?: InputMaybe<todos_bool_exp>;
+  predicate: Boolean_comparison_exp;
+}
+
+export interface todos_aggregate_bool_exp_bool_or {
+  arguments: todos_select_column_todos_aggregate_bool_exp_bool_or_arguments_columns;
+  distinct?: InputMaybe<Scalars["Boolean"]>;
+  filter?: InputMaybe<todos_bool_exp>;
+  predicate: Boolean_comparison_exp;
+}
+
+export interface todos_aggregate_bool_exp_count {
+  arguments?: InputMaybe<Array<todos_select_column>>;
+  distinct?: InputMaybe<Scalars["Boolean"]>;
+  filter?: InputMaybe<todos_bool_exp>;
+  predicate: Int_comparison_exp;
+}
+
+/** order by aggregate values of table "todos" */
+export interface todos_aggregate_order_by {
+  count?: InputMaybe<order_by>;
+  max?: InputMaybe<todos_max_order_by>;
+  min?: InputMaybe<todos_min_order_by>;
+}
+
+/** input type for inserting array relation for remote table "todos" */
+export interface todos_arr_rel_insert_input {
+  data: Array<todos_insert_input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<todos_on_conflict>;
+}
+
 /** Boolean expression to filter rows from the table "todos". All fields are combined with a logical 'AND'. */
 export interface todos_bool_exp {
   _and?: InputMaybe<Array<todos_bool_exp>>;
   _not?: InputMaybe<todos_bool_exp>;
   _or?: InputMaybe<Array<todos_bool_exp>>;
+  contact?: InputMaybe<contacts_bool_exp>;
+  contact_id?: InputMaybe<uuid_comparison_exp>;
   content?: InputMaybe<String_comparison_exp>;
   id?: InputMaybe<uuid_comparison_exp>;
   is_complete?: InputMaybe<Boolean_comparison_exp>;
@@ -1676,9 +1956,25 @@ export enum todos_constraint {
 
 /** input type for inserting data into table "todos" */
 export interface todos_insert_input {
+  contact?: InputMaybe<contacts_obj_rel_insert_input>;
+  contact_id?: InputMaybe<Scalars["uuid"]>;
   content?: InputMaybe<Scalars["String"]>;
   id?: InputMaybe<Scalars["uuid"]>;
   is_complete?: InputMaybe<Scalars["Boolean"]>;
+}
+
+/** order by max() on columns of table "todos" */
+export interface todos_max_order_by {
+  contact_id?: InputMaybe<order_by>;
+  content?: InputMaybe<order_by>;
+  id?: InputMaybe<order_by>;
+}
+
+/** order by min() on columns of table "todos" */
+export interface todos_min_order_by {
+  contact_id?: InputMaybe<order_by>;
+  content?: InputMaybe<order_by>;
+  id?: InputMaybe<order_by>;
 }
 
 /** on_conflict condition type for table "todos" */
@@ -1690,6 +1986,8 @@ export interface todos_on_conflict {
 
 /** Ordering options when selecting data from "todos". */
 export interface todos_order_by {
+  contact?: InputMaybe<contacts_order_by>;
+  contact_id?: InputMaybe<order_by>;
   content?: InputMaybe<order_by>;
   id?: InputMaybe<order_by>;
   is_complete?: InputMaybe<order_by>;
@@ -1703,6 +2001,8 @@ export interface todos_pk_columns_input {
 /** select columns of table "todos" */
 export enum todos_select_column {
   /** column name */
+  contact_id = "contact_id",
+  /** column name */
   content = "content",
   /** column name */
   id = "id",
@@ -1710,8 +2010,21 @@ export enum todos_select_column {
   is_complete = "is_complete",
 }
 
+/** select "todos_aggregate_bool_exp_bool_and_arguments_columns" columns of table "todos" */
+export enum todos_select_column_todos_aggregate_bool_exp_bool_and_arguments_columns {
+  /** column name */
+  is_complete = "is_complete",
+}
+
+/** select "todos_aggregate_bool_exp_bool_or_arguments_columns" columns of table "todos" */
+export enum todos_select_column_todos_aggregate_bool_exp_bool_or_arguments_columns {
+  /** column name */
+  is_complete = "is_complete",
+}
+
 /** input type for updating data in table "todos" */
 export interface todos_set_input {
+  contact_id?: InputMaybe<Scalars["uuid"]>;
   content?: InputMaybe<Scalars["String"]>;
   id?: InputMaybe<Scalars["uuid"]>;
   is_complete?: InputMaybe<Scalars["Boolean"]>;
@@ -1727,6 +2040,7 @@ export interface todos_stream_cursor_input {
 
 /** Initial value of the column from where the streaming should start */
 export interface todos_stream_cursor_value_input {
+  contact_id?: InputMaybe<Scalars["uuid"]>;
   content?: InputMaybe<Scalars["String"]>;
   id?: InputMaybe<Scalars["uuid"]>;
   is_complete?: InputMaybe<Scalars["Boolean"]>;
@@ -1734,6 +2048,8 @@ export interface todos_stream_cursor_value_input {
 
 /** update columns of table "todos" */
 export enum todos_update_column {
+  /** column name */
+  contact_id = "contact_id",
   /** column name */
   content = "content",
   /** column name */
@@ -2232,6 +2548,9 @@ export const scalarsEnumsHash: import("gqty").ScalarsEnumsHash = {
   Float: true,
   Int: true,
   String: true,
+  apps_constraint: true,
+  apps_select_column: true,
+  apps_update_column: true,
   authProviderRequests_constraint: true,
   authProviderRequests_select_column: true,
   authProviderRequests_update_column: true,
@@ -2259,6 +2578,9 @@ export const scalarsEnumsHash: import("gqty").ScalarsEnumsHash = {
   buckets_update_column: true,
   bytea: true,
   citext: true,
+  contacts_constraint: true,
+  contacts_select_column: true,
+  contacts_update_column: true,
   cursor_ordering: true,
   files_constraint: true,
   files_select_column: true,
@@ -2270,6 +2592,8 @@ export const scalarsEnumsHash: import("gqty").ScalarsEnumsHash = {
   timestamptz: true,
   todos_constraint: true,
   todos_select_column: true,
+  todos_select_column_todos_aggregate_bool_exp_bool_and_arguments_columns: true,
+  todos_select_column_todos_aggregate_bool_exp_bool_or_arguments_columns: true,
   todos_update_column: true,
   users_constraint: true,
   users_select_column: true,
@@ -2321,6 +2645,117 @@ export const generatedSchema = {
     _nsimilar: { __type: "String" },
     _regex: { __type: "String" },
     _similar: { __type: "String" },
+  },
+  apps: {
+    __typename: { __type: "String!" },
+    contact: { __type: "contacts!" },
+    contact_id: { __type: "uuid!" },
+    id: { __type: "uuid!" },
+    name: { __type: "String!" },
+  },
+  apps_aggregate: {
+    __typename: { __type: "String!" },
+    aggregate: { __type: "apps_aggregate_fields" },
+    nodes: { __type: "[apps!]!" },
+  },
+  apps_aggregate_bool_exp: {
+    count: { __type: "apps_aggregate_bool_exp_count" },
+  },
+  apps_aggregate_bool_exp_count: {
+    arguments: { __type: "[apps_select_column!]" },
+    distinct: { __type: "Boolean" },
+    filter: { __type: "apps_bool_exp" },
+    predicate: { __type: "Int_comparison_exp!" },
+  },
+  apps_aggregate_fields: {
+    __typename: { __type: "String!" },
+    count: {
+      __type: "Int!",
+      __args: { columns: "[apps_select_column!]", distinct: "Boolean" },
+    },
+    max: { __type: "apps_max_fields" },
+    min: { __type: "apps_min_fields" },
+  },
+  apps_aggregate_order_by: {
+    count: { __type: "order_by" },
+    max: { __type: "apps_max_order_by" },
+    min: { __type: "apps_min_order_by" },
+  },
+  apps_arr_rel_insert_input: {
+    data: { __type: "[apps_insert_input!]!" },
+    on_conflict: { __type: "apps_on_conflict" },
+  },
+  apps_bool_exp: {
+    _and: { __type: "[apps_bool_exp!]" },
+    _not: { __type: "apps_bool_exp" },
+    _or: { __type: "[apps_bool_exp!]" },
+    contact: { __type: "contacts_bool_exp" },
+    contact_id: { __type: "uuid_comparison_exp" },
+    id: { __type: "uuid_comparison_exp" },
+    name: { __type: "String_comparison_exp" },
+  },
+  apps_insert_input: {
+    contact: { __type: "contacts_obj_rel_insert_input" },
+    contact_id: { __type: "uuid" },
+    id: { __type: "uuid" },
+    name: { __type: "String" },
+  },
+  apps_max_fields: {
+    __typename: { __type: "String!" },
+    contact_id: { __type: "uuid" },
+    id: { __type: "uuid" },
+    name: { __type: "String" },
+  },
+  apps_max_order_by: {
+    contact_id: { __type: "order_by" },
+    id: { __type: "order_by" },
+    name: { __type: "order_by" },
+  },
+  apps_min_fields: {
+    __typename: { __type: "String!" },
+    contact_id: { __type: "uuid" },
+    id: { __type: "uuid" },
+    name: { __type: "String" },
+  },
+  apps_min_order_by: {
+    contact_id: { __type: "order_by" },
+    id: { __type: "order_by" },
+    name: { __type: "order_by" },
+  },
+  apps_mutation_response: {
+    __typename: { __type: "String!" },
+    affected_rows: { __type: "Int!" },
+    returning: { __type: "[apps!]!" },
+  },
+  apps_on_conflict: {
+    constraint: { __type: "apps_constraint!" },
+    update_columns: { __type: "[apps_update_column!]!" },
+    where: { __type: "apps_bool_exp" },
+  },
+  apps_order_by: {
+    contact: { __type: "contacts_order_by" },
+    contact_id: { __type: "order_by" },
+    id: { __type: "order_by" },
+    name: { __type: "order_by" },
+  },
+  apps_pk_columns_input: { id: { __type: "uuid!" } },
+  apps_set_input: {
+    contact_id: { __type: "uuid" },
+    id: { __type: "uuid" },
+    name: { __type: "String" },
+  },
+  apps_stream_cursor_input: {
+    initial_value: { __type: "apps_stream_cursor_value_input!" },
+    ordering: { __type: "cursor_ordering" },
+  },
+  apps_stream_cursor_value_input: {
+    contact_id: { __type: "uuid" },
+    id: { __type: "uuid" },
+    name: { __type: "String" },
+  },
+  apps_updates: {
+    _set: { __type: "apps_set_input" },
+    where: { __type: "apps_bool_exp!" },
   },
   authProviderRequests: {
     __typename: { __type: "String!" },
@@ -3491,6 +3926,137 @@ export const generatedSchema = {
     _regex: { __type: "citext" },
     _similar: { __type: "citext" },
   },
+  contacts: {
+    __typename: { __type: "String!" },
+    apps: {
+      __type: "[apps!]!",
+      __args: {
+        distinct_on: "[apps_select_column!]",
+        limit: "Int",
+        offset: "Int",
+        order_by: "[apps_order_by!]",
+        where: "apps_bool_exp",
+      },
+    },
+    apps_aggregate: {
+      __type: "apps_aggregate!",
+      __args: {
+        distinct_on: "[apps_select_column!]",
+        limit: "Int",
+        offset: "Int",
+        order_by: "[apps_order_by!]",
+        where: "apps_bool_exp",
+      },
+    },
+    firstName: { __type: "String!" },
+    id: { __type: "uuid!" },
+    lastName: { __type: "String!" },
+    todos: {
+      __type: "[todos!]!",
+      __args: {
+        distinct_on: "[todos_select_column!]",
+        limit: "Int",
+        offset: "Int",
+        order_by: "[todos_order_by!]",
+        where: "todos_bool_exp",
+      },
+    },
+    todos_aggregate: {
+      __type: "todos_aggregate!",
+      __args: {
+        distinct_on: "[todos_select_column!]",
+        limit: "Int",
+        offset: "Int",
+        order_by: "[todos_order_by!]",
+        where: "todos_bool_exp",
+      },
+    },
+  },
+  contacts_aggregate: {
+    __typename: { __type: "String!" },
+    aggregate: { __type: "contacts_aggregate_fields" },
+    nodes: { __type: "[contacts!]!" },
+  },
+  contacts_aggregate_fields: {
+    __typename: { __type: "String!" },
+    count: {
+      __type: "Int!",
+      __args: { columns: "[contacts_select_column!]", distinct: "Boolean" },
+    },
+    max: { __type: "contacts_max_fields" },
+    min: { __type: "contacts_min_fields" },
+  },
+  contacts_bool_exp: {
+    _and: { __type: "[contacts_bool_exp!]" },
+    _not: { __type: "contacts_bool_exp" },
+    _or: { __type: "[contacts_bool_exp!]" },
+    apps: { __type: "apps_bool_exp" },
+    apps_aggregate: { __type: "apps_aggregate_bool_exp" },
+    firstName: { __type: "String_comparison_exp" },
+    id: { __type: "uuid_comparison_exp" },
+    lastName: { __type: "String_comparison_exp" },
+    todos: { __type: "todos_bool_exp" },
+    todos_aggregate: { __type: "todos_aggregate_bool_exp" },
+  },
+  contacts_insert_input: {
+    apps: { __type: "apps_arr_rel_insert_input" },
+    firstName: { __type: "String" },
+    id: { __type: "uuid" },
+    lastName: { __type: "String" },
+    todos: { __type: "todos_arr_rel_insert_input" },
+  },
+  contacts_max_fields: {
+    __typename: { __type: "String!" },
+    firstName: { __type: "String" },
+    id: { __type: "uuid" },
+    lastName: { __type: "String" },
+  },
+  contacts_min_fields: {
+    __typename: { __type: "String!" },
+    firstName: { __type: "String" },
+    id: { __type: "uuid" },
+    lastName: { __type: "String" },
+  },
+  contacts_mutation_response: {
+    __typename: { __type: "String!" },
+    affected_rows: { __type: "Int!" },
+    returning: { __type: "[contacts!]!" },
+  },
+  contacts_obj_rel_insert_input: {
+    data: { __type: "contacts_insert_input!" },
+    on_conflict: { __type: "contacts_on_conflict" },
+  },
+  contacts_on_conflict: {
+    constraint: { __type: "contacts_constraint!" },
+    update_columns: { __type: "[contacts_update_column!]!" },
+    where: { __type: "contacts_bool_exp" },
+  },
+  contacts_order_by: {
+    apps_aggregate: { __type: "apps_aggregate_order_by" },
+    firstName: { __type: "order_by" },
+    id: { __type: "order_by" },
+    lastName: { __type: "order_by" },
+    todos_aggregate: { __type: "todos_aggregate_order_by" },
+  },
+  contacts_pk_columns_input: { id: { __type: "uuid!" } },
+  contacts_set_input: {
+    firstName: { __type: "String" },
+    id: { __type: "uuid" },
+    lastName: { __type: "String" },
+  },
+  contacts_stream_cursor_input: {
+    initial_value: { __type: "contacts_stream_cursor_value_input!" },
+    ordering: { __type: "cursor_ordering" },
+  },
+  contacts_stream_cursor_value_input: {
+    firstName: { __type: "String" },
+    id: { __type: "uuid" },
+    lastName: { __type: "String" },
+  },
+  contacts_updates: {
+    _set: { __type: "contacts_set_input" },
+    where: { __type: "contacts_bool_exp!" },
+  },
   files: {
     __typename: { __type: "String!" },
     bucket: { __type: "buckets!" },
@@ -3828,6 +4394,16 @@ export const generatedSchema = {
       __type: "users_mutation_response",
       __args: { where: "users_bool_exp!" },
     },
+    delete_apps: {
+      __type: "apps_mutation_response",
+      __args: { where: "apps_bool_exp!" },
+    },
+    delete_apps_by_pk: { __type: "apps", __args: { id: "uuid!" } },
+    delete_contacts: {
+      __type: "contacts_mutation_response",
+      __args: { where: "contacts_bool_exp!" },
+    },
+    delete_contacts_by_pk: { __type: "contacts", __args: { id: "uuid!" } },
     delete_todos: {
       __type: "todos_mutation_response",
       __args: { where: "todos_bool_exp!" },
@@ -3971,6 +4547,31 @@ export const generatedSchema = {
       __args: {
         objects: "[users_insert_input!]!",
         on_conflict: "users_on_conflict",
+      },
+    },
+    insert_apps: {
+      __type: "apps_mutation_response",
+      __args: {
+        objects: "[apps_insert_input!]!",
+        on_conflict: "apps_on_conflict",
+      },
+    },
+    insert_apps_one: {
+      __type: "apps",
+      __args: { object: "apps_insert_input!", on_conflict: "apps_on_conflict" },
+    },
+    insert_contacts: {
+      __type: "contacts_mutation_response",
+      __args: {
+        objects: "[contacts_insert_input!]!",
+        on_conflict: "contacts_on_conflict",
+      },
+    },
+    insert_contacts_one: {
+      __type: "contacts",
+      __args: {
+        object: "contacts_insert_input!",
+        on_conflict: "contacts_on_conflict",
       },
     },
     insert_todos: {
@@ -4150,6 +4751,18 @@ export const generatedSchema = {
         where: "users_bool_exp!",
       },
     },
+    update_apps: {
+      __type: "apps_mutation_response",
+      __args: { _set: "apps_set_input", where: "apps_bool_exp!" },
+    },
+    update_apps_by_pk: {
+      __type: "apps",
+      __args: { _set: "apps_set_input", pk_columns: "apps_pk_columns_input!" },
+    },
+    update_apps_many: {
+      __type: "[apps_mutation_response]",
+      __args: { updates: "[apps_updates!]!" },
+    },
     update_authProviderRequests_many: {
       __type: "[authProviderRequests_mutation_response]",
       __args: { updates: "[authProviderRequests_updates!]!" },
@@ -4182,6 +4795,21 @@ export const generatedSchema = {
       __type: "[buckets_mutation_response]",
       __args: { updates: "[buckets_updates!]!" },
     },
+    update_contacts: {
+      __type: "contacts_mutation_response",
+      __args: { _set: "contacts_set_input", where: "contacts_bool_exp!" },
+    },
+    update_contacts_by_pk: {
+      __type: "contacts",
+      __args: {
+        _set: "contacts_set_input",
+        pk_columns: "contacts_pk_columns_input!",
+      },
+    },
+    update_contacts_many: {
+      __type: "[contacts_mutation_response]",
+      __args: { updates: "[contacts_updates!]!" },
+    },
     update_files_many: {
       __type: "[files_mutation_response]",
       __args: { updates: "[files_updates!]!" },
@@ -4208,6 +4836,27 @@ export const generatedSchema = {
   },
   query: {
     __typename: { __type: "String!" },
+    apps: {
+      __type: "[apps!]!",
+      __args: {
+        distinct_on: "[apps_select_column!]",
+        limit: "Int",
+        offset: "Int",
+        order_by: "[apps_order_by!]",
+        where: "apps_bool_exp",
+      },
+    },
+    apps_aggregate: {
+      __type: "apps_aggregate!",
+      __args: {
+        distinct_on: "[apps_select_column!]",
+        limit: "Int",
+        offset: "Int",
+        order_by: "[apps_order_by!]",
+        where: "apps_bool_exp",
+      },
+    },
+    apps_by_pk: { __type: "apps", __args: { id: "uuid!" } },
     authProvider: { __type: "authProviders", __args: { id: "String!" } },
     authProviderRequest: {
       __type: "authProviderRequests",
@@ -4385,6 +5034,27 @@ export const generatedSchema = {
         where: "buckets_bool_exp",
       },
     },
+    contacts: {
+      __type: "[contacts!]!",
+      __args: {
+        distinct_on: "[contacts_select_column!]",
+        limit: "Int",
+        offset: "Int",
+        order_by: "[contacts_order_by!]",
+        where: "contacts_bool_exp",
+      },
+    },
+    contacts_aggregate: {
+      __type: "contacts_aggregate!",
+      __args: {
+        distinct_on: "[contacts_select_column!]",
+        limit: "Int",
+        offset: "Int",
+        order_by: "[contacts_order_by!]",
+        where: "contacts_bool_exp",
+      },
+    },
+    contacts_by_pk: { __type: "contacts", __args: { id: "uuid!" } },
     file: { __type: "files", __args: { id: "uuid!" } },
     files: {
       __type: "[files!]!",
@@ -4451,6 +5121,35 @@ export const generatedSchema = {
   },
   subscription: {
     __typename: { __type: "String!" },
+    apps: {
+      __type: "[apps!]!",
+      __args: {
+        distinct_on: "[apps_select_column!]",
+        limit: "Int",
+        offset: "Int",
+        order_by: "[apps_order_by!]",
+        where: "apps_bool_exp",
+      },
+    },
+    apps_aggregate: {
+      __type: "apps_aggregate!",
+      __args: {
+        distinct_on: "[apps_select_column!]",
+        limit: "Int",
+        offset: "Int",
+        order_by: "[apps_order_by!]",
+        where: "apps_bool_exp",
+      },
+    },
+    apps_by_pk: { __type: "apps", __args: { id: "uuid!" } },
+    apps_stream: {
+      __type: "[apps!]!",
+      __args: {
+        batch_size: "Int!",
+        cursor: "[apps_stream_cursor_input]!",
+        where: "apps_bool_exp",
+      },
+    },
     authProvider: { __type: "authProviders", __args: { id: "String!" } },
     authProviderRequest: {
       __type: "authProviderRequests",
@@ -4692,6 +5391,35 @@ export const generatedSchema = {
         where: "buckets_bool_exp",
       },
     },
+    contacts: {
+      __type: "[contacts!]!",
+      __args: {
+        distinct_on: "[contacts_select_column!]",
+        limit: "Int",
+        offset: "Int",
+        order_by: "[contacts_order_by!]",
+        where: "contacts_bool_exp",
+      },
+    },
+    contacts_aggregate: {
+      __type: "contacts_aggregate!",
+      __args: {
+        distinct_on: "[contacts_select_column!]",
+        limit: "Int",
+        offset: "Int",
+        order_by: "[contacts_order_by!]",
+        where: "contacts_bool_exp",
+      },
+    },
+    contacts_by_pk: { __type: "contacts", __args: { id: "uuid!" } },
+    contacts_stream: {
+      __type: "[contacts!]!",
+      __args: {
+        batch_size: "Int!",
+        cursor: "[contacts_stream_cursor_input]!",
+        where: "contacts_bool_exp",
+      },
+    },
     file: { __type: "files", __args: { id: "uuid!" } },
     files: {
       __type: "[files!]!",
@@ -4793,6 +5521,8 @@ export const generatedSchema = {
   },
   todos: {
     __typename: { __type: "String!" },
+    contact: { __type: "contacts" },
+    contact_id: { __type: "uuid" },
     content: { __type: "String!" },
     id: { __type: "uuid!" },
     is_complete: { __type: "Boolean!" },
@@ -4801,6 +5531,35 @@ export const generatedSchema = {
     __typename: { __type: "String!" },
     aggregate: { __type: "todos_aggregate_fields" },
     nodes: { __type: "[todos!]!" },
+  },
+  todos_aggregate_bool_exp: {
+    bool_and: { __type: "todos_aggregate_bool_exp_bool_and" },
+    bool_or: { __type: "todos_aggregate_bool_exp_bool_or" },
+    count: { __type: "todos_aggregate_bool_exp_count" },
+  },
+  todos_aggregate_bool_exp_bool_and: {
+    arguments: {
+      __type:
+        "todos_select_column_todos_aggregate_bool_exp_bool_and_arguments_columns!",
+    },
+    distinct: { __type: "Boolean" },
+    filter: { __type: "todos_bool_exp" },
+    predicate: { __type: "Boolean_comparison_exp!" },
+  },
+  todos_aggregate_bool_exp_bool_or: {
+    arguments: {
+      __type:
+        "todos_select_column_todos_aggregate_bool_exp_bool_or_arguments_columns!",
+    },
+    distinct: { __type: "Boolean" },
+    filter: { __type: "todos_bool_exp" },
+    predicate: { __type: "Boolean_comparison_exp!" },
+  },
+  todos_aggregate_bool_exp_count: {
+    arguments: { __type: "[todos_select_column!]" },
+    distinct: { __type: "Boolean" },
+    filter: { __type: "todos_bool_exp" },
+    predicate: { __type: "Int_comparison_exp!" },
   },
   todos_aggregate_fields: {
     __typename: { __type: "String!" },
@@ -4811,28 +5570,53 @@ export const generatedSchema = {
     max: { __type: "todos_max_fields" },
     min: { __type: "todos_min_fields" },
   },
+  todos_aggregate_order_by: {
+    count: { __type: "order_by" },
+    max: { __type: "todos_max_order_by" },
+    min: { __type: "todos_min_order_by" },
+  },
+  todos_arr_rel_insert_input: {
+    data: { __type: "[todos_insert_input!]!" },
+    on_conflict: { __type: "todos_on_conflict" },
+  },
   todos_bool_exp: {
     _and: { __type: "[todos_bool_exp!]" },
     _not: { __type: "todos_bool_exp" },
     _or: { __type: "[todos_bool_exp!]" },
+    contact: { __type: "contacts_bool_exp" },
+    contact_id: { __type: "uuid_comparison_exp" },
     content: { __type: "String_comparison_exp" },
     id: { __type: "uuid_comparison_exp" },
     is_complete: { __type: "Boolean_comparison_exp" },
   },
   todos_insert_input: {
+    contact: { __type: "contacts_obj_rel_insert_input" },
+    contact_id: { __type: "uuid" },
     content: { __type: "String" },
     id: { __type: "uuid" },
     is_complete: { __type: "Boolean" },
   },
   todos_max_fields: {
     __typename: { __type: "String!" },
+    contact_id: { __type: "uuid" },
     content: { __type: "String" },
     id: { __type: "uuid" },
   },
+  todos_max_order_by: {
+    contact_id: { __type: "order_by" },
+    content: { __type: "order_by" },
+    id: { __type: "order_by" },
+  },
   todos_min_fields: {
     __typename: { __type: "String!" },
+    contact_id: { __type: "uuid" },
     content: { __type: "String" },
     id: { __type: "uuid" },
+  },
+  todos_min_order_by: {
+    contact_id: { __type: "order_by" },
+    content: { __type: "order_by" },
+    id: { __type: "order_by" },
   },
   todos_mutation_response: {
     __typename: { __type: "String!" },
@@ -4845,12 +5629,15 @@ export const generatedSchema = {
     where: { __type: "todos_bool_exp" },
   },
   todos_order_by: {
+    contact: { __type: "contacts_order_by" },
+    contact_id: { __type: "order_by" },
     content: { __type: "order_by" },
     id: { __type: "order_by" },
     is_complete: { __type: "order_by" },
   },
   todos_pk_columns_input: { id: { __type: "uuid!" } },
   todos_set_input: {
+    contact_id: { __type: "uuid" },
     content: { __type: "String" },
     id: { __type: "uuid" },
     is_complete: { __type: "Boolean" },
@@ -4860,6 +5647,7 @@ export const generatedSchema = {
     ordering: { __type: "cursor_ordering" },
   },
   todos_stream_cursor_value_input: {
+    contact_id: { __type: "uuid" },
     content: { __type: "String" },
     id: { __type: "uuid" },
     is_complete: { __type: "Boolean" },
@@ -5325,6 +6113,77 @@ export const generatedSchema = {
     _nin: { __type: "[uuid!]" },
   },
 } as const;
+
+/**
+ * columns and relationships of "apps"
+ */
+export interface apps {
+  __typename?: "apps";
+  /**
+   * An object relationship
+   */
+  contact: contacts;
+  contact_id: ScalarsEnums["uuid"];
+  id: ScalarsEnums["uuid"];
+  name: ScalarsEnums["String"];
+}
+
+/**
+ * aggregated selection of "apps"
+ */
+export interface apps_aggregate {
+  __typename?: "apps_aggregate";
+  aggregate?: Maybe<apps_aggregate_fields>;
+  nodes: Array<apps>;
+}
+
+/**
+ * aggregate fields of "apps"
+ */
+export interface apps_aggregate_fields {
+  __typename?: "apps_aggregate_fields";
+  count: (args?: {
+    columns?: Maybe<Array<apps_select_column>>;
+    distinct?: Maybe<Scalars["Boolean"]>;
+  }) => ScalarsEnums["Int"];
+  max?: Maybe<apps_max_fields>;
+  min?: Maybe<apps_min_fields>;
+}
+
+/**
+ * aggregate max on columns
+ */
+export interface apps_max_fields {
+  __typename?: "apps_max_fields";
+  contact_id?: Maybe<ScalarsEnums["uuid"]>;
+  id?: Maybe<ScalarsEnums["uuid"]>;
+  name?: Maybe<ScalarsEnums["String"]>;
+}
+
+/**
+ * aggregate min on columns
+ */
+export interface apps_min_fields {
+  __typename?: "apps_min_fields";
+  contact_id?: Maybe<ScalarsEnums["uuid"]>;
+  id?: Maybe<ScalarsEnums["uuid"]>;
+  name?: Maybe<ScalarsEnums["String"]>;
+}
+
+/**
+ * response of any mutation on the table "apps"
+ */
+export interface apps_mutation_response {
+  __typename?: "apps_mutation_response";
+  /**
+   * number of rows affected by the mutation
+   */
+  affected_rows: ScalarsEnums["Int"];
+  /**
+   * data from the rows affected by the mutation
+   */
+  returning: Array<apps>;
+}
 
 /**
  * Oauth requests, inserted before redirecting to the provider's site. Don't modify its structure as Hasura Auth relies on it to function properly.
@@ -6279,6 +7138,173 @@ export interface buckets_variance_fields {
 }
 
 /**
+ * columns and relationships of "contacts"
+ */
+export interface contacts {
+  __typename?: "contacts";
+  /**
+   * An array relationship
+   */
+  apps: (args?: {
+    /**
+     * distinct select on columns
+     */
+    distinct_on?: Maybe<Array<apps_select_column>>;
+    /**
+     * limit the number of rows returned
+     */
+    limit?: Maybe<Scalars["Int"]>;
+    /**
+     * skip the first n rows. Use only with order_by
+     */
+    offset?: Maybe<Scalars["Int"]>;
+    /**
+     * sort the rows by one or more columns
+     */
+    order_by?: Maybe<Array<apps_order_by>>;
+    /**
+     * filter the rows returned
+     */
+    where?: Maybe<apps_bool_exp>;
+  }) => Array<apps>;
+  /**
+   * An aggregate relationship
+   */
+  apps_aggregate: (args?: {
+    /**
+     * distinct select on columns
+     */
+    distinct_on?: Maybe<Array<apps_select_column>>;
+    /**
+     * limit the number of rows returned
+     */
+    limit?: Maybe<Scalars["Int"]>;
+    /**
+     * skip the first n rows. Use only with order_by
+     */
+    offset?: Maybe<Scalars["Int"]>;
+    /**
+     * sort the rows by one or more columns
+     */
+    order_by?: Maybe<Array<apps_order_by>>;
+    /**
+     * filter the rows returned
+     */
+    where?: Maybe<apps_bool_exp>;
+  }) => apps_aggregate;
+  firstName: ScalarsEnums["String"];
+  id: ScalarsEnums["uuid"];
+  lastName: ScalarsEnums["String"];
+  /**
+   * An array relationship
+   */
+  todos: (args?: {
+    /**
+     * distinct select on columns
+     */
+    distinct_on?: Maybe<Array<todos_select_column>>;
+    /**
+     * limit the number of rows returned
+     */
+    limit?: Maybe<Scalars["Int"]>;
+    /**
+     * skip the first n rows. Use only with order_by
+     */
+    offset?: Maybe<Scalars["Int"]>;
+    /**
+     * sort the rows by one or more columns
+     */
+    order_by?: Maybe<Array<todos_order_by>>;
+    /**
+     * filter the rows returned
+     */
+    where?: Maybe<todos_bool_exp>;
+  }) => Array<todos>;
+  /**
+   * An aggregate relationship
+   */
+  todos_aggregate: (args?: {
+    /**
+     * distinct select on columns
+     */
+    distinct_on?: Maybe<Array<todos_select_column>>;
+    /**
+     * limit the number of rows returned
+     */
+    limit?: Maybe<Scalars["Int"]>;
+    /**
+     * skip the first n rows. Use only with order_by
+     */
+    offset?: Maybe<Scalars["Int"]>;
+    /**
+     * sort the rows by one or more columns
+     */
+    order_by?: Maybe<Array<todos_order_by>>;
+    /**
+     * filter the rows returned
+     */
+    where?: Maybe<todos_bool_exp>;
+  }) => todos_aggregate;
+}
+
+/**
+ * aggregated selection of "contacts"
+ */
+export interface contacts_aggregate {
+  __typename?: "contacts_aggregate";
+  aggregate?: Maybe<contacts_aggregate_fields>;
+  nodes: Array<contacts>;
+}
+
+/**
+ * aggregate fields of "contacts"
+ */
+export interface contacts_aggregate_fields {
+  __typename?: "contacts_aggregate_fields";
+  count: (args?: {
+    columns?: Maybe<Array<contacts_select_column>>;
+    distinct?: Maybe<Scalars["Boolean"]>;
+  }) => ScalarsEnums["Int"];
+  max?: Maybe<contacts_max_fields>;
+  min?: Maybe<contacts_min_fields>;
+}
+
+/**
+ * aggregate max on columns
+ */
+export interface contacts_max_fields {
+  __typename?: "contacts_max_fields";
+  firstName?: Maybe<ScalarsEnums["String"]>;
+  id?: Maybe<ScalarsEnums["uuid"]>;
+  lastName?: Maybe<ScalarsEnums["String"]>;
+}
+
+/**
+ * aggregate min on columns
+ */
+export interface contacts_min_fields {
+  __typename?: "contacts_min_fields";
+  firstName?: Maybe<ScalarsEnums["String"]>;
+  id?: Maybe<ScalarsEnums["uuid"]>;
+  lastName?: Maybe<ScalarsEnums["String"]>;
+}
+
+/**
+ * response of any mutation on the table "contacts"
+ */
+export interface contacts_mutation_response {
+  __typename?: "contacts_mutation_response";
+  /**
+   * number of rows affected by the mutation
+   */
+  affected_rows: ScalarsEnums["Int"];
+  /**
+   * data from the rows affected by the mutation
+   */
+  returning: Array<contacts>;
+}
+
+/**
  * columns and relationships of "storage.files"
  */
 export interface files {
@@ -6490,6 +7516,14 @@ export interface Mutation {
   deleteUsers: (args: {
     where: users_bool_exp;
   }) => Maybe<users_mutation_response>;
+  delete_apps: (args: {
+    where: apps_bool_exp;
+  }) => Maybe<apps_mutation_response>;
+  delete_apps_by_pk: (args: { id: Scalars["uuid"] }) => Maybe<apps>;
+  delete_contacts: (args: {
+    where: contacts_bool_exp;
+  }) => Maybe<contacts_mutation_response>;
+  delete_contacts_by_pk: (args: { id: Scalars["uuid"] }) => Maybe<contacts>;
   delete_todos: (args: {
     where: todos_bool_exp;
   }) => Maybe<todos_mutation_response>;
@@ -6574,6 +7608,22 @@ export interface Mutation {
     objects: Array<users_insert_input>;
     on_conflict?: Maybe<users_on_conflict>;
   }) => Maybe<users_mutation_response>;
+  insert_apps: (args: {
+    objects: Array<apps_insert_input>;
+    on_conflict?: Maybe<apps_on_conflict>;
+  }) => Maybe<apps_mutation_response>;
+  insert_apps_one: (args: {
+    object: apps_insert_input;
+    on_conflict?: Maybe<apps_on_conflict>;
+  }) => Maybe<apps>;
+  insert_contacts: (args: {
+    objects: Array<contacts_insert_input>;
+    on_conflict?: Maybe<contacts_on_conflict>;
+  }) => Maybe<contacts_mutation_response>;
+  insert_contacts_one: (args: {
+    object: contacts_insert_input;
+    on_conflict?: Maybe<contacts_on_conflict>;
+  }) => Maybe<contacts>;
   insert_todos: (args: {
     objects: Array<todos_insert_input>;
     on_conflict?: Maybe<todos_on_conflict>;
@@ -6688,6 +7738,17 @@ export interface Mutation {
     _set?: Maybe<users_set_input>;
     where: users_bool_exp;
   }) => Maybe<users_mutation_response>;
+  update_apps: (args: {
+    _set?: Maybe<apps_set_input>;
+    where: apps_bool_exp;
+  }) => Maybe<apps_mutation_response>;
+  update_apps_by_pk: (args: {
+    _set?: Maybe<apps_set_input>;
+    pk_columns: apps_pk_columns_input;
+  }) => Maybe<apps>;
+  update_apps_many: (args: {
+    updates: Array<apps_updates>;
+  }) => Maybe<Array<Maybe<apps_mutation_response>>>;
   update_authProviderRequests_many: (args: {
     updates: Array<authProviderRequests_updates>;
   }) => Maybe<Array<Maybe<authProviderRequests_mutation_response>>>;
@@ -6712,6 +7773,17 @@ export interface Mutation {
   update_buckets_many: (args: {
     updates: Array<buckets_updates>;
   }) => Maybe<Array<Maybe<buckets_mutation_response>>>;
+  update_contacts: (args: {
+    _set?: Maybe<contacts_set_input>;
+    where: contacts_bool_exp;
+  }) => Maybe<contacts_mutation_response>;
+  update_contacts_by_pk: (args: {
+    _set?: Maybe<contacts_set_input>;
+    pk_columns: contacts_pk_columns_input;
+  }) => Maybe<contacts>;
+  update_contacts_many: (args: {
+    updates: Array<contacts_updates>;
+  }) => Maybe<Array<Maybe<contacts_mutation_response>>>;
   update_files_many: (args: {
     updates: Array<files_updates>;
   }) => Maybe<Array<Maybe<files_mutation_response>>>;
@@ -6733,6 +7805,21 @@ export interface Mutation {
 
 export interface Query {
   __typename?: "Query";
+  apps: (args?: {
+    distinct_on?: Maybe<Array<apps_select_column>>;
+    limit?: Maybe<Scalars["Int"]>;
+    offset?: Maybe<Scalars["Int"]>;
+    order_by?: Maybe<Array<apps_order_by>>;
+    where?: Maybe<apps_bool_exp>;
+  }) => Array<apps>;
+  apps_aggregate: (args?: {
+    distinct_on?: Maybe<Array<apps_select_column>>;
+    limit?: Maybe<Scalars["Int"]>;
+    offset?: Maybe<Scalars["Int"]>;
+    order_by?: Maybe<Array<apps_order_by>>;
+    where?: Maybe<apps_bool_exp>;
+  }) => apps_aggregate;
+  apps_by_pk: (args: { id: Scalars["uuid"] }) => Maybe<apps>;
   authProvider: (args: { id: Scalars["String"] }) => Maybe<authProviders>;
   authProviderRequest: (args: {
     id: Scalars["uuid"];
@@ -6859,6 +7946,21 @@ export interface Query {
     order_by?: Maybe<Array<buckets_order_by>>;
     where?: Maybe<buckets_bool_exp>;
   }) => buckets_aggregate;
+  contacts: (args?: {
+    distinct_on?: Maybe<Array<contacts_select_column>>;
+    limit?: Maybe<Scalars["Int"]>;
+    offset?: Maybe<Scalars["Int"]>;
+    order_by?: Maybe<Array<contacts_order_by>>;
+    where?: Maybe<contacts_bool_exp>;
+  }) => Array<contacts>;
+  contacts_aggregate: (args?: {
+    distinct_on?: Maybe<Array<contacts_select_column>>;
+    limit?: Maybe<Scalars["Int"]>;
+    offset?: Maybe<Scalars["Int"]>;
+    order_by?: Maybe<Array<contacts_order_by>>;
+    where?: Maybe<contacts_bool_exp>;
+  }) => contacts_aggregate;
+  contacts_by_pk: (args: { id: Scalars["uuid"] }) => Maybe<contacts>;
   file: (args: { id: Scalars["uuid"] }) => Maybe<files>;
   files: (args?: {
     distinct_on?: Maybe<Array<files_select_column>>;
@@ -6908,6 +8010,26 @@ export interface Query {
 
 export interface Subscription {
   __typename?: "Subscription";
+  apps: (args?: {
+    distinct_on?: Maybe<Array<apps_select_column>>;
+    limit?: Maybe<Scalars["Int"]>;
+    offset?: Maybe<Scalars["Int"]>;
+    order_by?: Maybe<Array<apps_order_by>>;
+    where?: Maybe<apps_bool_exp>;
+  }) => Array<apps>;
+  apps_aggregate: (args?: {
+    distinct_on?: Maybe<Array<apps_select_column>>;
+    limit?: Maybe<Scalars["Int"]>;
+    offset?: Maybe<Scalars["Int"]>;
+    order_by?: Maybe<Array<apps_order_by>>;
+    where?: Maybe<apps_bool_exp>;
+  }) => apps_aggregate;
+  apps_by_pk: (args: { id: Scalars["uuid"] }) => Maybe<apps>;
+  apps_stream: (args: {
+    batch_size: Scalars["Int"];
+    cursor: Array<Maybe<apps_stream_cursor_input>>;
+    where?: Maybe<apps_bool_exp>;
+  }) => Array<apps>;
   authProvider: (args: { id: Scalars["String"] }) => Maybe<authProviders>;
   authProviderRequest: (args: {
     id: Scalars["uuid"];
@@ -7074,6 +8196,26 @@ export interface Subscription {
     cursor: Array<Maybe<buckets_stream_cursor_input>>;
     where?: Maybe<buckets_bool_exp>;
   }) => Array<buckets>;
+  contacts: (args?: {
+    distinct_on?: Maybe<Array<contacts_select_column>>;
+    limit?: Maybe<Scalars["Int"]>;
+    offset?: Maybe<Scalars["Int"]>;
+    order_by?: Maybe<Array<contacts_order_by>>;
+    where?: Maybe<contacts_bool_exp>;
+  }) => Array<contacts>;
+  contacts_aggregate: (args?: {
+    distinct_on?: Maybe<Array<contacts_select_column>>;
+    limit?: Maybe<Scalars["Int"]>;
+    offset?: Maybe<Scalars["Int"]>;
+    order_by?: Maybe<Array<contacts_order_by>>;
+    where?: Maybe<contacts_bool_exp>;
+  }) => contacts_aggregate;
+  contacts_by_pk: (args: { id: Scalars["uuid"] }) => Maybe<contacts>;
+  contacts_stream: (args: {
+    batch_size: Scalars["Int"];
+    cursor: Array<Maybe<contacts_stream_cursor_input>>;
+    where?: Maybe<contacts_bool_exp>;
+  }) => Array<contacts>;
   file: (args: { id: Scalars["uuid"] }) => Maybe<files>;
   files: (args?: {
     distinct_on?: Maybe<Array<files_select_column>>;
@@ -7141,6 +8283,11 @@ export interface Subscription {
  */
 export interface todos {
   __typename?: "todos";
+  /**
+   * An object relationship
+   */
+  contact?: Maybe<contacts>;
+  contact_id?: Maybe<ScalarsEnums["uuid"]>;
   content: ScalarsEnums["String"];
   id: ScalarsEnums["uuid"];
   is_complete: ScalarsEnums["Boolean"];
@@ -7173,6 +8320,7 @@ export interface todos_aggregate_fields {
  */
 export interface todos_max_fields {
   __typename?: "todos_max_fields";
+  contact_id?: Maybe<ScalarsEnums["uuid"]>;
   content?: Maybe<ScalarsEnums["String"]>;
   id?: Maybe<ScalarsEnums["uuid"]>;
 }
@@ -7182,6 +8330,7 @@ export interface todos_max_fields {
  */
 export interface todos_min_fields {
   __typename?: "todos_min_fields";
+  contact_id?: Maybe<ScalarsEnums["uuid"]>;
   content?: Maybe<ScalarsEnums["String"]>;
   id?: Maybe<ScalarsEnums["uuid"]>;
 }
@@ -7537,6 +8686,12 @@ export interface SchemaObjectTypes {
   Mutation: Mutation;
   Query: Query;
   Subscription: Subscription;
+  apps: apps;
+  apps_aggregate: apps_aggregate;
+  apps_aggregate_fields: apps_aggregate_fields;
+  apps_max_fields: apps_max_fields;
+  apps_min_fields: apps_min_fields;
+  apps_mutation_response: apps_mutation_response;
   authProviderRequests: authProviderRequests;
   authProviderRequests_aggregate: authProviderRequests_aggregate;
   authProviderRequests_aggregate_fields: authProviderRequests_aggregate_fields;
@@ -7601,6 +8756,12 @@ export interface SchemaObjectTypes {
   buckets_var_pop_fields: buckets_var_pop_fields;
   buckets_var_samp_fields: buckets_var_samp_fields;
   buckets_variance_fields: buckets_variance_fields;
+  contacts: contacts;
+  contacts_aggregate: contacts_aggregate;
+  contacts_aggregate_fields: contacts_aggregate_fields;
+  contacts_max_fields: contacts_max_fields;
+  contacts_min_fields: contacts_min_fields;
+  contacts_mutation_response: contacts_mutation_response;
   files: files;
   files_aggregate: files_aggregate;
   files_aggregate_fields: files_aggregate_fields;
@@ -7632,6 +8793,12 @@ export type SchemaObjectTypesNames =
   | "Mutation"
   | "Query"
   | "Subscription"
+  | "apps"
+  | "apps_aggregate"
+  | "apps_aggregate_fields"
+  | "apps_max_fields"
+  | "apps_min_fields"
+  | "apps_mutation_response"
   | "authProviderRequests"
   | "authProviderRequests_aggregate"
   | "authProviderRequests_aggregate_fields"
@@ -7696,6 +8863,12 @@ export type SchemaObjectTypesNames =
   | "buckets_var_pop_fields"
   | "buckets_var_samp_fields"
   | "buckets_variance_fields"
+  | "contacts"
+  | "contacts_aggregate"
+  | "contacts_aggregate_fields"
+  | "contacts_max_fields"
+  | "contacts_min_fields"
+  | "contacts_mutation_response"
   | "files"
   | "files_aggregate"
   | "files_aggregate_fields"
@@ -7734,6 +8907,9 @@ export type MakeNullable<T> = {
 };
 
 export interface ScalarsEnums extends MakeNullable<Scalars> {
+  apps_constraint: apps_constraint | undefined;
+  apps_select_column: apps_select_column | undefined;
+  apps_update_column: apps_update_column | undefined;
   authProviderRequests_constraint: authProviderRequests_constraint | undefined;
   authProviderRequests_select_column:
     | authProviderRequests_select_column
@@ -7766,6 +8942,9 @@ export interface ScalarsEnums extends MakeNullable<Scalars> {
   buckets_constraint: buckets_constraint | undefined;
   buckets_select_column: buckets_select_column | undefined;
   buckets_update_column: buckets_update_column | undefined;
+  contacts_constraint: contacts_constraint | undefined;
+  contacts_select_column: contacts_select_column | undefined;
+  contacts_update_column: contacts_update_column | undefined;
   cursor_ordering: cursor_ordering | undefined;
   files_constraint: files_constraint | undefined;
   files_select_column: files_select_column | undefined;
@@ -7779,6 +8958,12 @@ export interface ScalarsEnums extends MakeNullable<Scalars> {
   order_by: order_by | undefined;
   todos_constraint: todos_constraint | undefined;
   todos_select_column: todos_select_column | undefined;
+  todos_select_column_todos_aggregate_bool_exp_bool_and_arguments_columns:
+    | todos_select_column_todos_aggregate_bool_exp_bool_and_arguments_columns
+    | undefined;
+  todos_select_column_todos_aggregate_bool_exp_bool_or_arguments_columns:
+    | todos_select_column_todos_aggregate_bool_exp_bool_or_arguments_columns
+    | undefined;
   todos_update_column: todos_update_column | undefined;
   users_constraint: users_constraint | undefined;
   users_select_column: users_select_column | undefined;
